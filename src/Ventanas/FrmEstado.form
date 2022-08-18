@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel" min="-2" pref="244" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblEnergia" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSalud" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="lblAnimo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="lblBano" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblHambre" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="BarSalud" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="BarEnergia" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="BarAnimos" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="BarBano" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="BarHambre" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="BarEnergia" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BarSalud" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BarAnimos" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BarBano" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BarHambre" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lblEnergia" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblSalud" min="-2" pref="34" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblAnimo" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblBano" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblHambre" min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JProgressBar" name="BarBano">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblEnergia">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ENERGIA"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="BarAnimos">
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="BarSalud">
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="BarEnergia">
+        </Component>
+        <Component class="javax.swing.JProgressBar" name="BarHambre">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblSalud">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="SALUD"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblAnimo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ANIMO"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBano">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="GANAS DE IR"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblHambre">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HAMBRE"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
