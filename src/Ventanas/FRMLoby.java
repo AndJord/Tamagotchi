@@ -23,11 +23,11 @@ import javax.swing.JPanel;
  */
 public class FRMLoby extends javax.swing.JFrame {
 
-    FrmAlimentos alimentos = new FrmAlimentos();
-    FrmEstado estados = new FrmEstado();
-    FrmMedicina medicinas = new FrmMedicina();
-    FrmActividades actividades = new FrmActividades();
-    FrmDespertaryDormir siesta = new FrmDespertaryDormir();
+//    FrmAlimentos alimentos = new FrmAlimentos();
+//    FrmEstado estados = new FrmEstado();
+//    FrmMedicina medicinas = new FrmMedicina();
+//    FrmActividades actividades = new FrmActividades();
+//    FrmDespertaryDormir siesta = new FrmDespertaryDormir();
     Mascota mascota = Mascota.inicializar();
     private Controlador controlador;
 
@@ -42,87 +42,99 @@ public class FRMLoby extends javax.swing.JFrame {
         BtnComida.setPressedIcon(setIconoPresionado("/ImgLoby/icono Comidas.png", BtnComida, 5, 5));
         BtnDormir.setIcon(setIcono("/ImgLoby/BotonDormirse.jpg", BtnDormir));
         BtnDormir.setPressedIcon(setIconoPresionado("/ImgLoby/BotonDormirse.jpg", BtnDormir, 5, 5));
-        BtnEstados.setIcon(setIcono("/ImgLoby/IconoEstado.png", BtnEstados));
-        BtnEstados.setPressedIcon(setIconoPresionado("/ImgLoby/IconoEstado.png", BtnEstados, 5, 5));
         BtnActividades.setIcon(setIcono("/ImgLoby/icono deportes.png", BtnActividades));
         BtnActividades.setPressedIcon(setIconoPresionado("/ImgLoby/icono deportes.png", BtnActividades, 5, 5));
         BtnMedicina.setIcon(setIcono("/ImgLoby/IconoHospital.jpg", BtnMedicina));
         BtnMedicina.setPressedIcon(setIconoPresionado("/ImgLoby/IconoHospital.jpg", BtnMedicina, 5, 5));
-        Nombrar();
-        controlador = Controlador.instanciar(this, Mascota.inicializar(), estados);
+        //Nombrar();
+        controlador = Controlador.inicializar(this, Mascota.inicializar());
         lblEdad.setText(Integer.toString(Mascota.inicializar().getEdad()));
-        lblBotones.add(estados);
-        estados.setVisible(true);
-        alimentos.setVisible(false);
-        deshabilitar();
-        actividadBtns();
+        
+//        PnlBotones.add(estados);
+//        estados.setVisible(true);
+//        alimentos.setVisible(false);
+//        deshabilitar();
+//        accionesBtns();
     }
 
+    public int getEnergia() {
+        return BarEnergia.getValue();
+    }
+
+    public void setEnergia(int val) {
+        if (getEnergia() > 0 && getEnergia() <= 100) {
+            this.BarEnergia.setValue(val);
+        } 
+//        else if (val < 0) {
+//            this.BarEnergia.setValue(0);
+//        } else if (val > 100) {
+//            this.BarEnergia.setValue(100);
+//        }
+    }
+
+    public int getSalud() {
+        return BarSalud.getValue();
+    }
+
+    public void setSalud(int valor) {
+        if (getSalud() >= 0) {
+            this.BarSalud.setValue(valor);
+        } else if (valor < 0) {
+            this.BarSalud.setValue(0);
+        } else if (valor > 100) {
+            this.BarSalud.setValue(100);
+        }
+    }
+
+    public int getAnimos() {
+        return BarAnimo.getValue();
+    }
+
+    public void setAnimo(int val) {
+        if (getAnimos() >= 0) {
+            this.BarAnimo.setValue(val);
+        } else if (val < 0) {
+            this.BarAnimo.setValue(0);
+        } else if (val > 100) {
+            this.BarAnimo.setValue(100);
+        }
+    }
+
+    public int getNecesidades() {
+        return BarBano.getValue();
+    }
+
+    public void setNecesidades(int valor) {
+        if (getNecesidades() >= 0) {
+            this.BarBano.setValue(valor);
+        } else if (valor < 0) {
+            this.BarBano.setValue(0);
+        } else if (valor > 100) {
+            this.BarBano.setValue(100);
+        }
+    }
+
+    public int getHambre() {
+        return BarHambre.getValue();
+    }
+
+    public void setHambre(int valor) {
+        if (getHambre() >= 0) {
+            this.BarHambre.setValue(valor);
+        } else if (valor < 0) {
+            this.BarHambre.setValue(0);
+        } else if (valor > 100) {
+            this.BarHambre.setValue(100);
+        }
+    }
+
+//    private void Nombrar() {
+//        String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre de la mascota", "Bienvenido", 3);
+//        this.lblNombre.setText(nombre);
+//    }
+//
     public void setlblEdad(String lblEdad) {
         this.lblEdad.setText(lblEdad);
-    }
-
-    private void Nombrar() {
-        String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre de la mascota", "Bienvenido", 3);
-        this.lblNombre.setText(nombre);
-    }
-
-    private void actividadBtns() {
-        try {
-            this.BtnComida.addActionListener((ActionListener) this);
-            this.BtnBano.addActionListener((ActionListener) this);
-            this.BtnActividades.addActionListener((ActionListener) this);
-            this.BtnDormir.addActionListener((ActionListener) this);
-            this.BtnEstados.addActionListener((ActionListener) this);
-            this.BtnMedicina.addActionListener((ActionListener) this);
-        } catch (Exception e) {
-        }
-    }
-
-    private void deshabilitar() {
-        try {
-            if (alimentos.isVisible()) {
-                botones(false, true, true, true, true);
-            } else if (estados.isVisible()) {
-                botones(true, false, true, true, true);
-            } else if (medicinas.isVisible()) {
-                botones(true, true, false, true, true);
-            } else if (actividades.isVisible()) {
-                botones(true, true, true, false, true);
-            } else if (siesta.isVisible()) {
-                botones(true, true, true, true, false);
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    private void botones(boolean val1, boolean val2, boolean val3, boolean val4, boolean val5) {
-        try {
-            BtnComida.setEnabled(val1);
-            BtnEstados.setEnabled(val2);
-            BtnMedicina.setEnabled(val3);
-            BtnActividades.setEnabled(val4);
-            BtnDormir.setEnabled(val5);
-        } catch (Exception e) {}
-        }
-
-    private void Mostrar(JPanel objeto) {
-        lblBotones.add(objeto);
-        lblBotones.validate();
-    }
-
-    private void frames(boolean val1, boolean val2, boolean val3, boolean val4, boolean val5) {
-        alimentos.setVisible(val1);
-        estados.setVisible(val2);
-        medicinas.setVisible(val3);
-        actividades.setVisible(val4);
-        siesta.setVisible(val5);
-    }
-
-    private void metodo(boolean val1, boolean val2, boolean val3, boolean val4, boolean val5, JPanel panel) {
-        frames(val1, val2, val3, val4, val5);
-        Mostrar(panel);
-        deshabilitar();
     }
 
     /**
@@ -144,7 +156,6 @@ public class FRMLoby extends javax.swing.JFrame {
         };
         jPanel1 = new javax.swing.JPanel();
         BtnBano = new javax.swing.JButton();
-        BtnEstados = new javax.swing.JButton();
         BtnActividades = new javax.swing.JButton();
         BtnComida = new javax.swing.JButton();
         BtnMedicina = new javax.swing.JButton();
@@ -152,7 +163,17 @@ public class FRMLoby extends javax.swing.JFrame {
         lblEtapa = new javax.swing.JLabel();
         lblEdad = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
-        lblBotones = new javax.swing.JPanel();
+        Mostrar = new javax.swing.JPanel();
+        BarEnergia = new javax.swing.JProgressBar();
+        jLabel1 = new javax.swing.JLabel();
+        BarSalud = new javax.swing.JProgressBar();
+        jLabel2 = new javax.swing.JLabel();
+        BarHambre = new javax.swing.JProgressBar();
+        BarBano = new javax.swing.JProgressBar();
+        jLabel3 = new javax.swing.JLabel();
+        BarAnimo = new javax.swing.JProgressBar();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jButton6.setText("jButton1");
 
@@ -164,12 +185,6 @@ public class FRMLoby extends javax.swing.JFrame {
         BtnBano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBanoActionPerformed(evt);
-            }
-        });
-
-        BtnEstados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEstadosActionPerformed(evt);
             }
         });
 
@@ -204,7 +219,6 @@ public class FRMLoby extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnEstados, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnComida, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnMedicina, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,69 +239,142 @@ public class FRMLoby extends javax.swing.JFrame {
                 .addComponent(BtnComida, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnActividades, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnEstados, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         lblEtapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Pollo/Saludable/HuevoSaludable.jpg"))); // NOI18N
 
-        javax.swing.GroupLayout lblBotonesLayout = new javax.swing.GroupLayout(lblBotones);
-        lblBotones.setLayout(lblBotonesLayout);
-        lblBotonesLayout.setHorizontalGroup(
-            lblBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        lblEdad.setBackground(new java.awt.Color(255, 153, 0));
+        lblEdad.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        lblNombre.setBackground(new java.awt.Color(255, 153, 0));
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        Mostrar.setBackground(new java.awt.Color(255, 204, 102));
+
+        javax.swing.GroupLayout MostrarLayout = new javax.swing.GroupLayout(Mostrar);
+        Mostrar.setLayout(MostrarLayout);
+        MostrarLayout.setHorizontalGroup(
+            MostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 656, Short.MAX_VALUE)
         );
-        lblBotonesLayout.setVerticalGroup(
-            lblBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        MostrarLayout.setVerticalGroup(
+            MostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 231, Short.MAX_VALUE)
         );
+
+        BarEnergia.setValue(100);
+        BarEnergia.setStringPainted(true);
+
+        jLabel1.setText("Energia");
+
+        BarSalud.setStringPainted(true);
+
+        jLabel2.setText("Salud");
+
+        BarHambre.setStringPainted(true);
+
+        BarBano.setStringPainted(true);
+
+        jLabel3.setText("Hambre");
+
+        BarAnimo.setStringPainted(true);
+
+        jLabel4.setText("Animo");
+
+        jLabel5.setText("Ganas de ir");
 
         dskLoby.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskLoby.setLayer(lblEtapa, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskLoby.setLayer(lblEdad, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskLoby.setLayer(lblNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dskLoby.setLayer(lblBotones, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(Mostrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(BarEnergia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(BarSalud, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(BarHambre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(BarBano, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(BarAnimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskLoby.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dskLobyLayout = new javax.swing.GroupLayout(dskLoby);
         dskLoby.setLayout(dskLobyLayout);
         dskLobyLayout.setHorizontalGroup(
             dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dskLobyLayout.createSequentialGroup()
+            .addGroup(dskLobyLayout.createSequentialGroup()
                 .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dskLobyLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addComponent(lblEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(lblEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dskLobyLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(BarEnergia, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BarSalud, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BarHambre, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BarAnimo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(BarBano, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dskLobyLayout.createSequentialGroup()
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dskLobyLayout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(lblEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121))
+                            .addGroup(dskLobyLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dskLobyLayout.setVerticalGroup(
             dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dskLobyLayout.createSequentialGroup()
-                .addGap(18, 84, Short.MAX_VALUE)
-                .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BarBano, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(BarEnergia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BarHambre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BarAnimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BarSalud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(dskLobyLayout.createSequentialGroup()
+                        .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(dskLobyLayout.createSequentialGroup()
-                                .addGap(307, 307, 307)
+                                .addGap(315, 315, 315)
                                 .addGroup(dskLobyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dskLobyLayout.createSequentialGroup()
                                 .addComponent(lblEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63)))
-                        .addComponent(lblBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -296,9 +383,8 @@ public class FRMLoby extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(dskLoby)
-                .addGap(20, 20, 20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dskLoby, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,31 +395,57 @@ public class FRMLoby extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDormirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDormirActionPerformed
+        try {
+            InternoDespertaryDormir dormir = new InternoDespertaryDormir();
+            Mostrar.add(dormir);
+            dormir.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No puedo abrir la alacena por " + e.getMessage());
+        }
 
     }//GEN-LAST:event_BtnDormirActionPerformed
 
     private void BtnMedicinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMedicinaActionPerformed
-        // TODO add your handling code here:
+        try {
+            InternoMedicinas medicina = new InternoMedicinas();
+            Mostrar.add(medicina);
+            medicina.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No puedo abrir la alacena por " + e.getMessage());
+        }
+
     }//GEN-LAST:event_BtnMedicinaActionPerformed
 
     private void BtnComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComidaActionPerformed
-        // TODO add your handling code here:
+        try {
+            IfrmAlimentos comida = new IfrmAlimentos();
+            Mostrar.add(comida);
+            comida.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No puedo abrir la alacena por " + e.getMessage());
+        }
+
     }//GEN-LAST:event_BtnComidaActionPerformed
 
     private void BtnActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActividadesActionPerformed
-        // TODO add your handling code here:
+        try {
+            InternoActividades actividades = new InternoActividades();
+            Mostrar.add(actividades);
+            actividades.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No puedo abrir la alacena por " + e.getMessage());
+        }
     }//GEN-LAST:event_BtnActividadesActionPerformed
-
-    private void BtnEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEstadosActionPerformed
-
-    }//GEN-LAST:event_BtnEstadosActionPerformed
 
     private void BtnBanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBanoActionPerformed
         if (mascota.getNecesidades() > 0 && Mascota.inicializar().getCircunstancia().equals(Circunstancia.Despierto)) {
             this.mascota.setNecesidades(mascota.getNecesidades());
             Controlador.getControlador().actualizar(mascota);
+            mascota.setNecesidades(mascota.getNecesidades() - 30);
+            System.out.println(mascota.getNecesidades()+" Fui al baño");
         } else {
-            JOptionPane.showMessageDialog(null, "¡OPS!, tu Mascota no quiere ir al baño", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tu Mascota ya no quiere ir al baño", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_BtnBanoActionPerformed
 
@@ -410,36 +522,29 @@ public class FRMLoby extends javax.swing.JFrame {
         return icono;
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar BarAnimo;
+    private javax.swing.JProgressBar BarBano;
+    private javax.swing.JProgressBar BarEnergia;
+    private javax.swing.JProgressBar BarHambre;
+    private javax.swing.JProgressBar BarSalud;
     private javax.swing.JButton BtnActividades;
     private javax.swing.JButton BtnBano;
     private javax.swing.JButton BtnComida;
     private javax.swing.JButton BtnDormir;
-    private javax.swing.JButton BtnEstados;
     private javax.swing.JButton BtnMedicina;
+    private javax.swing.JPanel Mostrar;
     private javax.swing.JDesktopPane dskLoby;
     private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel lblBotones;
     private javax.swing.JLabel lblEdad;
     public javax.swing.JLabel lblEtapa;
     private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 
-    public void actionPerformed(ActionEvent e) {
-        Object evt = e.getSource();
-
-        if (evt.equals(BtnComida)) {
-            metodo(true, false, false, false, false, alimentos);
-        } else if (evt.equals(BtnEstados)) {
-            metodo(false, true, false, false, false, estados);
-        } else if (evt.equals(BtnMedicina)) {
-            metodo(false, false, true, false, false, medicinas);
-        } else if (evt.equals(BtnActividades)) {
-            metodo(false, false, false, true, false, actividades);
-        } else if (evt.equals(BtnDormir)) {
-            metodo(false, false, false, false, true, siesta);
-        }
-    }
 }
