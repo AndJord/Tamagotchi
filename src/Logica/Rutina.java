@@ -26,7 +26,7 @@ import Medicina.PosioSalud;
  * @author andre
  */
 public class Rutina {
-
+//retornar valores de los constructores(crear las acciones)
     public Medicamentos ConstMed(int tipo) {
         switch (tipo) {
             case 1:

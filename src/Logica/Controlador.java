@@ -4,7 +4,6 @@
  */
 package Logica;
 
-import Ventanas.FrmEstado;
 import Ventanas.FRMLoby;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,38 +19,37 @@ public class Controlador {
 
     private FRMLoby loby;
     private Mascota mascota;
-    private final FrmEstado estados;
 
-    public final int TIEMPO = 2000;
+    public final int TIEMPO = 4000;
     private static Controlador unico;
 
     private int contador = 1;
     private double tiempo;
     private JButton btn;
 
-    private Controlador(FRMLoby loby, Mascota mascota, FrmEstado estados) {
+    private Controlador(FRMLoby loby, Mascota mascota) {
 
         this.loby = loby;
         this.mascota = mascota;
-        this.estados = estados;
+        // this.estados = estados;
         ciclo.start();
         actualizar(mascota);
 
     }
 
-    public static Controlador inicializar(FRMLoby juego, Mascota mascota, FrmEstado estados) {
-        
-            if (unico == null) {
-                unico = new Controlador(juego, mascota, estados);
-            }
-            return unico;
-        
+    public static Controlador inicializar(FRMLoby juego, Mascota mascota) {
+
+        if (unico == null) {
+            unico = new Controlador(juego, mascota);
+        }
+        return unico;
+
     }
 
     public static Controlador getControlador() {
         return unico;
     }
-
+//ciclo de tiempo del juego y la mascota
     Timer ciclo = new Timer(this.TIEMPO, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             sumarEdad();
@@ -68,32 +66,35 @@ public class Controlador {
         mascota.setEdad(mascota.getEdad() + 1);
     }
 
+//actualizar estados
     public void actualizar(Mascota mascota) {
         try {
-            estados.setEnergia(mascota.getEnergia());
-            estados.setAnimo(mascota.getAnimo());
-            estados.setHambre(mascota.getHambre());
-            estados.setNecesidades(mascota.getNecesidades());
-            estados.setSalud(mascota.getSalud());
+            loby.setEnergia(mascota.getEnergia());
+            loby.setAnimo(mascota.getAnimo());
+            loby.setHambre(mascota.getHambre());
+            loby.setNecesidades(mascota.getNecesidades());
+            loby.setSalud(mascota.getSalud());
             loby.lblEtapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Pollo/" + mascota.getCondicion() + "/Pollo" + mascota.getEtapa() + mascota.getCondicion() + ".jpg")));
         } catch (Exception e) {
         }
     }
+//estado de vida
 
     public void vida() {
         try {
             if (mascota.getCircunstancia().equals(Circunstancia.Despierto) && mascota.getCondicion().equals(Condicion.Saludable)) {
-                afectacion(10, 10, 0);
+                afectacion(4, 2, 0);
             } else if (mascota.getCircunstancia().equals(Circunstancia.Dormido) && mascota.getCondicion().equals(Condicion.Saludable)) {
-                afectacion(10, 0, 0);
+                afectacion(5, 0, 0);
             } else if (mascota.getCircunstancia().equals(Circunstancia.Despierto) && mascota.getCondicion().equals(Condicion.Enfermo)) {
-                afectacion(10, 10, 10);
+                afectacion(8, 4, 8);
             } else if (mascota.getCircunstancia().equals(Circunstancia.Dormido) && mascota.getCondicion().equals(Condicion.Enfermo)) {
-                afectacion(10, 0, 10);
+                afectacion(10, 2, 5);
             }
         } catch (Exception e) {
         }
     }
+//afectacion de los estados
 
     private void afectacion(int val1, int val2, int val3) {
         this.mascota.setNecesidades(mascota.getNecesidades() + val1);
@@ -142,6 +143,7 @@ public class Controlador {
         } catch (Exception e) {
         }
     }
+//bloqueo de  los botones alimentos, actividades, medicina
 
     public void bloqueo(JButton btn, double tiempo) {
         try {
@@ -171,18 +173,19 @@ public class Controlador {
         } catch (Exception e) {
         }
     }
+//aviso de punto crtitico en los estados
 
     private void avisar() {
         try {
-            if (mascota.getAnimo() == 75) {
-                JOptionPane.showMessageDialog(null, "Los niveles de Animo de tu mascota están al máximo, por favor juega con él", "AVISO", JOptionPane.WARNING_MESSAGE);
+            if (mascota.getAnimo() == 80) {
+                JOptionPane.showMessageDialog(null, "Los niveles de Animo de tu mascota están casi al máximo, por favor juega con él", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
 
-            if (mascota.getHambre() == 75) {
+            if (mascota.getHambre() == 85) {
                 JOptionPane.showMessageDialog(null, "Tu Mascota Tiene Hambre, Aliméntala", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
 
-            if (mascota.getEnergia() < 25) {
+            if (mascota.getEnergia() == 10) {
                 JOptionPane.showMessageDialog(null, "Tu Mascota Está Cansada", "AVISO", JOptionPane.WARNING_MESSAGE);
             }
 
@@ -203,7 +206,7 @@ public class Controlador {
 
     private void revisar() {
         try {
-            if (validarNecesidades() && validarAburrimiento() && validarHambre() && validarEnergia()) {
+            if (validarNecesidades() || validarAburrimiento() || validarHambre() || validarEnergia()) {
                 salud();
             }
         } catch (Exception e) {
@@ -211,19 +214,19 @@ public class Controlador {
     }
 
     private boolean validarNecesidades() {
-        return mascota.getNecesidades() >= 80;
+        return mascota.getNecesidades() == 100;
     }
 
     private boolean validarAburrimiento() {
-        return mascota.getAnimo() >= 80;
+        return mascota.getAnimo() == 100;
     }
 
     private boolean validarHambre() {
-        return mascota.getHambre() >= 80;
+        return mascota.getHambre() == 100;
     }
 
     private boolean validarEnergia() {
-        return mascota.getEnergia() <= 20;
+        return mascota.getEnergia() == 0;
     }
 
 }
